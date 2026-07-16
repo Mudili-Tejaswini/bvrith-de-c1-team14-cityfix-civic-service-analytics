@@ -6,8 +6,8 @@
 **Program:** ZENAIZ x BVRIT Hyderabad Data Engineering Internship Program  
 **Track:** Data Engineering  
 **Duration:** 12 Weeks  
-**Team:** [14 / Team Name]  
-**Students:** [M.Tejaswini], [A.Usha], [K.Sri Hasitha]  
+**Team:** Team 14 
+**Students:** M. Tejaswini, A. Usha, K. Sri Hasitha
 **AI Teammate:** Used responsibly for explanation, debugging, review, and documentation support.
 
 ---
@@ -17,12 +17,12 @@
 Write 5–8 lines explaining the assigned project.
 
 Example structure:
+## 1. Project Summary
 
-- **Domain:** [Urban Mobility / IPL Matchday / Weather / etc.]
-- **Core engineering problem:** [What raw data needs to become trusted insight?]
+- **Domain:** Civic Service Analytics (GovTech)
+- **Core engineering problem:** Municipal service request data contains duplicates, missing values, invalid agency codes, and inconsistent timestamps. This                                        project transforms raw NYC 311 service request data into trusted and decision-ready insights.
 - **Main pipeline:** Raw Sources → Bronze → Silver → Data Quality → Gold → Power BI → Streaming Simulation
-- **Final outcome:** GitHub repo, Databricks notebooks, Gold outputs, Power BI dashboard, streaming simulation, final demo.
-
+- **Final outcome:** A complete data engineering solution consisting of Databricks notebooks, Gold metric tables, Power BI dashboards, streaming simulation,                            GitHub documentation, and project evidence.
 ---
 
 ## 2. Tools Used
