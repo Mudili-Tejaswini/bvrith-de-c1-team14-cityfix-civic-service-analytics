@@ -9,13 +9,13 @@
 
 Explain the domain in simple language.
 
-Prompts:
+CityFix is a Civic Service Analytics project based on official NYC 311 service request data. It represents how municipal authorities manage public complaints and service requests.
 
-- What real-world process or operation does this project represent?
-- What kinds of data are generated?
-- Why is raw data not enough?
-- Who would use the final dashboard or metrics?
+The data includes request details, agency information, complaint categories, boroughs, request status, and timestamps.
 
+Raw data alone is not reliable because it may contain duplicate records, missing values, invalid agency codes, and incorrect timestamps. These issues can affect reporting and decision-making.
+
+The final dashboard will help Civic Operations Leads, Agency Coordinators, Borough Managers, and Public Service Analysts monitor service performance and make informed decisions.
 ---
 
 ## 2. Engineering Problem
