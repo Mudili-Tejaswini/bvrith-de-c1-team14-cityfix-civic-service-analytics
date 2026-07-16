@@ -22,25 +22,23 @@ The final dashboard will help Civic Operations Leads, Agency Coordinators, Borou
 
 Write the data engineering problem clearly.
 
-Example format:
-
-> The project must convert multiple raw source files into trusted Bronze, Silver, Data Quality, Gold, and dashboard-ready outputs using Databricks and Power BI.
-
+The project must convert multiple raw NYC 311 service request datasets into trusted Bronze, Silver, Data Quality, Gold, and dashboard-ready outputs using Databricks, Spark SQL, and Power BI. The pipeline will clean, validate, transform, and organize the data to produce reliable analytics and support streaming simulation.
 ---
 
 ## 3. Users / Stakeholders
 
-| User / Stakeholder | What they need from the data |
-|---|---|
-| [Example: Operations Head] | [Example: View daily demand and service issues] |
-| [Example: Analyst] | [Example: Compare trends and investigate failures] |
+| User / Stakeholder     | What they need from the data                                     |
+| ---------------------- | ---------------------------------------------------------------- |
+| Civic Operations Lead  | Monitor service request volume, backlog, and overall performance |
+| Agency Coordinator     | Track agency-wise SLA performance and closure rates              |
+| Borough Manager        | Analyze unresolved requests across boroughs                      |
+| Public Service Analyst | Monitor live request activity and generate reports               |
 
 ---
 
 ## 4. Scope Inclusions
 
 List what the team will build.
-
 - Raw source files
 - Bronze ingestion
 - Silver standardization
@@ -48,27 +46,26 @@ List what the team will build.
 - Gold metrics
 - Power BI dashboard
 - Streaming simulation
-- GitHub evidence
-
+- GitHub documentation and weekly evidence
 ---
 
 ## 5. Scope Exclusions
 
 List what the team will not build.
-
-Examples:
-
 - No production application
-- No real customer data
+- No real customer or personal data
+- No complaint registration website
 - No payment gateway integration
 - No copied internet project submission
 - No fake screenshots or unexplained AI-generated work
-
 ---
 
 ## 6. Success Criteria
 
 By the end of 12 weeks, the project is successful if:
+- Power BI dashboard uses Gold tables only.
+- Data quality checks are implemented and documented.
+- GitHub repository contains complete weekly evidence and project documentation.
 
 - The pipeline can be explained end to end.
 - The team can show Bronze, Silver, DQ, Gold, dashboard, and streaming evidence.
