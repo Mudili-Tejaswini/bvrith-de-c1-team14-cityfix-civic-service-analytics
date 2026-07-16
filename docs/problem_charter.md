@@ -1,9 +1,8 @@
 # Problem Charter
 
-**Week:** 1  
-**Owner(s):** [Student names]  
-**Project:** [Project title]
-
+**Week:** 1
+**Owner(s):** M. Tejaswini, A. Usha, K. Sri Hasitha
+**Project:** CityFix – Civic Service Analytics
 ---
 
 ## 1. Problem Context
