@@ -1,0 +1,14 @@
+[
+  {
+    "complaint_id": 6,
+    "ward_id": 102,
+    "department_id": 203,
+    "status": "Open"
+  },
+  {
+    "complaint_id": 7,
+    "ward_id": 101,
+    "department_id": 201,
+    "status": "Closed"
+  }
+]

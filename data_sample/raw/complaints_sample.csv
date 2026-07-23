@@ -1,0 +1,6 @@
+complaint_id,ward_id,department_id,status
+1,101,201,Open
+2,102,202,Closed
+3,103,201,In Progress
+4,101,203,Closed
+5,104,202,Open
