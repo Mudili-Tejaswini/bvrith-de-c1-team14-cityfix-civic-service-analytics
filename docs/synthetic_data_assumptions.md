@@ -15,11 +15,11 @@ This project uses synthetic educational data only. It must not be presented as r
 
 | Area | Assumption |
 |---|---|
-| Geography / scope | [Example: Hyderabad and nearby regions] |
-| Time period | [Example: July to September 2026] |
-| Source systems | [Example: Two different operational feeds] |
-| Event types | [Example: booking, scan, alert, transaction] |
-| Reference data | [Example: zones, categories, products, venues] |
+| Geography / scope | Synthetic Metrovale City with multiple boroughs and ZIP code regions |
+| Time period | January 2026 to December 2026 |
+| Source systems | Service Request System, Agency Management System, and Reference Data Files |
+| Event types | Service request creation, request update, request closure, and streaming request events |
+| Reference data | Agencies, Boroughs, Complaint Categories, and ZIP Geography |
 
 ---
 
@@ -27,10 +27,10 @@ This project uses synthetic educational data only. It must not be presented as r
 
 | File | Approximate Rows | Reason |
 |---|---:|---|
-| `[source_file_1].csv` | [rows] | [reason] |
-| `[source_file_2].csv` | [rows] | [reason] |
-| `[reference_file].csv` | [rows] | [reason] |
-| `[streaming_events].json` | [rows] | [reason] |
+| `requests.csv` | 10,000 | Main civic service request dataset |
+| `agencies.csv` | 25 | Agency reference data |
+| `categories.csv` | 30 | Complaint category reference data |
+| `new_request_event.json` | 500 | Streaming event simulation |
 
 ---
 
@@ -55,3 +55,5 @@ Before using generated data, the team must check:
 - Dates and numeric values look realistic.
 - Controlled defects exist but do not dominate the dataset.
 - Source files are different enough to require real standardization.
+- Bronze, Silver, and Gold outputs are generated successfully.
+- Data quality validation passes before dashboard creation.
