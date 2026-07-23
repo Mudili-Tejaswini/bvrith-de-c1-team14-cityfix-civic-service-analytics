@@ -8,10 +8,11 @@
 
 | Topic | Link | How It Was Used |
 |---|---|---|
-| Databricks Free Edition | [link] | Workspace setup |
-| Databricks notebooks | [link] | SQL/Python notebook usage |
-| Auto Loader | [link] | Streaming simulation reference |
-| Power BI Desktop | [link] | Dashboard learning |
+| Databricks Free Edition | https://docs.databricks.com | Workspace setup and notebook execution |
+| Apache Spark Documentation | https://spark.apache.org/docs/latest/ | PySpark transformations and DataFrame operations |
+| Delta Lake Documentation | https://docs.delta.io/latest/ | Bronze, Silver, and Gold table implementation |
+| Power BI Desktop | https://learn.microsoft.com/power-bi/ | Dashboard creation and visualization |
+| GitHub Documentation | https://docs.github.com | Repository management and version control |
 
 ---
 
@@ -19,12 +20,11 @@
 
 | Repository / Resource | Link | What We Learned | What We Changed |
 |---|---|---|---|
-| [Repo name] | [link] | [pattern learned] | [how team adapted it] |
+| Databricks Sample Projects | https://github.com/databricks | Medallion Architecture and notebook organization | Adapted for the CityFix project |
+| Apache Spark Examples | https://github.com/apache/spark | DataFrame operations and Spark SQL | Modified for civic service analytics |
 
 ---
 
 ## 3. AI Usage Notes
 
-AI assistance should also be summarized in weekly logs.
-
-Use this section only for major AI-supported references, prompts, or design patterns that influenced the project.
+Artificial Intelligence (ChatGPT) was used to support learning, documentation, code explanation, debugging, and report preparation. All generated content was reviewed, verified, and adapted by the project team before inclusion in the final submission. AI assistance is documented in the weekly logs wherever applicable.
