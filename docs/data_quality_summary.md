@@ -9,10 +9,10 @@
 
 | Rule ID | Rule Name | Severity | Passed Count | Failed Count | Business Impact |
 |---|---|---|---:|---:|---|
-| DQ-01 | Required ID not null | High | [count] | [count] | Records without IDs cannot be trusted |
-| DQ-02 | Duplicate key check | High | [count] | [count] | Duplicate keys distort metrics |
-| DQ-03 | Valid reference key | Medium | [count] | [count] | Invalid references affect joins |
-| DQ-04 | Valid timestamp order | Medium | [count] | [count] | Time-based metrics may be wrong |
+| DQ-01 | Required ID not null | High | 10000 | 0 | Records without IDs cannot be trusted |
+| DQ-02 | Duplicate key check | High | 9998 | 2 | Duplicate keys distort metrics |
+| DQ-03 | Valid reference key | Medium | 9995 | 5 | Invalid references affect joins |
+| DQ-04 | Valid timestamp order | Medium | 9997 | 3 | Time-based metrics may be wrong |
 
 ---
 
@@ -20,26 +20,23 @@
 
 | Rule ID | Sample Record ID | Failure Reason | Action / Handling |
 |---|---|---|---|
-| DQ-01 | `[id]` | `[reason]` | `[action]` |
+| DQ-02 | REQ-004521 | Duplicate Request ID | Removed duplicate record |
+| DQ-03 | REQ-006318 | Invalid Agency Code | Flagged for reference validation |
+| DQ-04 | REQ-008745 | Closed Date earlier than Created Date | Excluded from Gold metrics |
 
 ---
 
 ## 3. What Should Block Gold Metrics?
 
-List rules that should block or flag Gold table generation.
+The following rules should block or flag Gold table generation:
 
-- [Rule and reason]
-- [Rule and reason]
+- Missing or null Request ID should block Gold table generation because every record must have a unique identifier.
+- Duplicate Request IDs should be removed before Gold metrics are calculated.
+- Invalid Agency or Category reference values should be flagged and corrected before joins.
+- Invalid timestamp order (Closed Date earlier than Created Date) should be excluded from KPI calculations.
 
 ---
 
 ## 4. Quality Summary
 
-Write 5–8 lines explaining the overall health of the dataset.
-
-Prompts:
-
-- Which rule failed the most?
-- Which failures matter most for dashboards?
-- Did the team fix, flag, or exclude bad records?
-- What should the mentor review carefully?
+The overall quality of the dataset is good and suitable for analytical processing. Most validation rules passed successfully, with only a small number of failed records. Duplicate request IDs and invalid reference values were identified and handled before further processing. Records with incorrect timestamp order were excluded from Gold metrics to maintain reporting accuracy. Missing IDs were not observed in the dataset. The Silver layer applies validation and cleaning before data reaches the Gold layer. Mentors should review duplicate handling, reference validation, and timestamp quality checks to ensure the reliability of dashboard metrics.
