@@ -6,6 +6,7 @@ Suggested naming:
 
 ```text
 week03_databricks_data_loaded.png
+week03_schema_and_row_count.png
 week04_bronze_counts.png
 week05_silver_schema.png
 week06_dq_results.png
