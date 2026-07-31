@@ -18,10 +18,12 @@ The goal of this sprint was to ingest the raw CSV files into the Bronze layer us
 | Task | Owner | Status | Evidence |
 |---|---|---|---|
 | Created Week 4 notebook (02_bronze_ingestion.ipynb) | A. Usha | Done | Notebook |
-| Loaded complaints_sample.csv into Spark DataFrame | A. Usha | Done | Notebook |
-| Loaded departments_sample.csv into Spark DataFrame | A. Usha | Done | Notebook |
-| Loaded wards_sample.csv into Spark DataFrame | A. Usha | Done | Notebook |
-| Added metadata columns (ingested_at, source_file, ingestion_run_id, schema_version) | A. Usha | Done | Notebook |
+| Loaded agencies.csv into Spark DataFrame | A. Usha | Done | Notebook |
+| Loaded boroughs.csv into Spark DataFrame | A. Usha | Done | Notebook |
+| Loaded categories.csv into Spark DataFrame | A. Usha | Done | Notebook |
+| Loaded requests.csv into Spark DataFrame | A. Usha | Done | Notebook |
+| Loaded zip_geography.csv into Spark DataFrame | A. Usha | Done | Notebook |
+| Added metadata columns (source_file, ingestion_timestamp, ingestion_run_id) | A. Usha | Done | Notebook |
 | Created Bronze Delta tables | A. Usha | Done | Databricks Tables |
 | Verified row counts between source and Bronze tables | A. Usha | Done | Notebook Output |
 | Validated Bronze tables and metadata | A. Usha | Done | Screenshots |
@@ -31,7 +33,8 @@ The goal of this sprint was to ingest the raw CSV files into the Bronze layer us
 ## 3. Key Decisions
 
 - Used Delta tables as the Bronze storage format.
-- Added metadata columns to improve data lineage and tracking without changing the original source data.
+- Preserved all source data without applying transformations.
+- Added metadata columns (`source_file`, `ingestion_timestamp`, `ingestion_run_id`) to improve data lineage and ingestion tracking.
 
 ---
 
@@ -39,16 +42,16 @@ The goal of this sprint was to ingest the raw CSV files into the Bronze layer us
 
 | Blocker | Impact | Help Needed |
 |---|---|---|
-| Delta metadata mismatch while overwriting existing Bronze tables | Bronze tables could not be updated initially | Resolved by dropping the existing tables and recreating them with the new schema |
+| Metadata column issue while creating Bronze DataFrames | Bronze DataFrames could not be created initially | Resolved by replacing `input_file_name()` with the file name using `lit()` and successfully recreated the Bronze DataFrames |
 
 ---
 
 ## 5. Evidence Added to GitHub
 
 - Updated `notebooks/02_bronze_ingestion.ipynb`
-- Added screenshots of Bronze tables and metadata columns
-- Added screenshots of source count and Bronze count verification
-- Updated Week 04 Log
+- Added `week04_bronze_table_created.png`
+- Added `week04_bronze_counts.png`
+- Updated `weekly_logs/week04_log.md`
 
 ---
 
@@ -56,14 +59,17 @@ The goal of this sprint was to ingest the raw CSV files into the Bronze layer us
 
 | Question | Response |
 |---|---|
-| Where AI helped | Assisted in implementing the Bronze ingestion pipeline, adding metadata columns, resolving Delta metadata mismatch errors, and verifying Bronze tables. |
-| What we changed after AI suggestion | Added metadata columns (`ingested_at`, `source_file`, `ingestion_run_id`, `schema_version`) and recreated the Bronze tables after resolving schema mismatch issues. |
-| What we verified manually | Verified that all three source files loaded successfully, Bronze tables were created, metadata columns were present, and source and Bronze row counts matched. |
-| What we can explain without AI | We understand how the Bronze layer works, how Delta tables are created, why metadata columns are added, and how row-count reconciliation validates successful ingestion. |
+| Where AI helped | Assisted in implementing the Bronze ingestion pipeline, creating Delta tables, adding metadata columns, resolving the `input_file_name()` issue, and validating the Bronze layer. |
+| What we changed after AI suggestion | Added metadata columns (`source_file`, `ingestion_timestamp`, `ingestion_run_id`) and created Bronze Delta tables for all five source datasets. |
+| What we verified manually | Verified that all five source files loaded successfully, Bronze tables were created, metadata columns existed, and source and Bronze row counts matched. |
+| What we can explain without AI | We understand the purpose of the Bronze layer, how Delta tables are created, why ingestion metadata is required, and how row-count reconciliation validates successful data ingestion. |
 
 ---
 
 ## 7. Next Week Preparation
 
 - Create the `03_silver_transformations.ipynb` notebook.
-- Read Bronze tables, clean the data, handle null values and duplicates, and create the Silver layer.
+- Read Bronze Delta tables.
+- Perform basic data cleaning and validation.
+- Handle null values and duplicate records.
+- Create Silver layer Delta tables.
