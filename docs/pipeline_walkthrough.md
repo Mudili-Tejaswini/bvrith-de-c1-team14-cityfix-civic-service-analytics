@@ -23,6 +23,61 @@
 ## 2. Architecture Explanation
 
 The CityFix Civic Service Analytics project follows the Medallion Architecture. Synthetic raw datasets and streaming events are generated and loaded into the project. The raw files are explored to understand their structure, quality, and relationships. During Bronze ingestion, the raw data is stored without modification to preserve the original records. The Silver layer cleans, validates, standardizes, and enriches the data by removing duplicates, handling missing values, and applying business rules. Data quality checks ensure that only reliable records continue through the pipeline. The Gold layer creates aggregated business metrics and KPI tables for reporting. These Gold tables are exported to Power BI to build interactive dashboards for analysis. Finally, a streaming simulation processes live request events to demonstrate real-time data ingestion and analytics.
+---
+
+## 2.1 Week 7 – Gold Layer
+
+The Week 7 Gold layer is built from the Trusted Silver data and provides the business-ready dimensional, fact, and summary tables required for analytics and Power BI reporting.
+
+### Gold Dimensions
+
+The Gold layer contains the following 8 dimensions:
+
+- `dim_date`
+- `dim_time_band`
+- `dim_agency`
+- `dim_complaint_category`
+- `dim_geography_borough_zip`
+- `dim_request_status`
+- `dim_channel`
+- `dim_location_type`
+
+### Gold Fact Tables
+
+The Gold layer contains the following 4 fact tables:
+
+- `fact_service_request` – one row per trusted service request.
+- `fact_request_resolution` – one row per valid resolved request.
+- `fact_request_backlog_snapshot` – one row per open request per snapshot date.
+- `fact_request_event_stream` – schema-ready event fact for future streaming events.
+
+### Gold Summary Tables
+
+The Gold layer contains the following 5 summary tables:
+
+- `agency_sla_summary`
+- `category_volume_summary`
+- `borough_backlog_summary`
+- `request_resolution_trend_summary`
+- `channel_and_location_summary`
+
+### Gold Validation Results
+
+The Week 7 Gold layer was validated using reconciliation, uniqueness, chronology, and summary checks.
+
+- Trusted Silver distinct requests: **179,701**
+- Gold service requests: **179,701**
+- Gold resolution requests: **165,200**
+- Backlog snapshot rows: **2,314,218**
+- Snapshot duplicate groups: **0**
+- Resolution chronology invalid rows: **0**
+- Agency SLA summary total: **179,701**
+- Category volume summary total: **179,701**
+- Channel and location summary total: **179,701**
+
+All required Gold dimensions passed key uniqueness validation, and the Gold service request fact reconciled with the Trusted Silver request population.
+
+The Gold layer is therefore ready for the Week 8 Power BI reporting stage.
 
 ---
 
