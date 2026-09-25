@@ -273,42 +273,17 @@ All five selected Gold tables were checked for duplicate rows. The total row cou
 
 ## Gold Reconciliation
 
-The `channel_and_location_summary` Gold table was checked in Databricks.
+The final Power BI dashboard values were reconciled against the owning Gold table using the same filter state.
 
-The validated Gold total for `total_requests` was:
+- Gold source: `cityfix.gold.channel_and_location_summary`
+- Gold `Total Requests`: **179701**
+- Power BI `Total Requests` card on the **Civic Operations** page: **180K**
+- The Power BI value is displayed in rounded form, so **180K corresponds to the Gold value of 179701**.
+- Screenshot evidence: `screenshots/week09_05_filtered_reconciliation.png`
 
-```text
-179701
-```
+Reconciliation status: **Validated**
 
-The Power BI `Total Requests` measure is owned by:
-
-```text
-channel_and_location_summary
-```
-
-and uses:
-
-```DAX
-SUM(channel_and_location_summary[total_requests])
-```
-
-During Week 9 validation, the Power BI Total Requests card displayed approximately:
-
-```text
-45K
-```
-
-with the card showing an `(All)` filter state.
-
-This does not currently match the Databricks Gold total of `179701`.
-
-Therefore, the reconciliation is **not yet considered complete**.
-
-The difference must be investigated before final submission by checking the Power BI model, source data, filters, aggregation, and refresh state.
-
-No manual correction of the Gold value has been performed.
-
+The reconciliation confirms that the Power BI Total Requests KPI is based on the approved Gold source and preserves the intended measure meaning.
 ---
 
 ## Power BI Connection and Refresh
