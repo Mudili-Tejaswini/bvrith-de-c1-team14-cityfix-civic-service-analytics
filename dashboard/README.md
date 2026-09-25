@@ -1,19 +1,18 @@
-Copy-paste this **entire content** into `dashboard/README.md`:
-
-````markdown
 # CityFix Power BI Dashboard
 
 ## Overview
 
-This folder contains the Week 8 Power BI dashboard for the CityFix Civic Service Analytics project.
+This folder contains the Power BI dashboard for the CityFix Civic Service Analytics project.
 
-The dashboard uses approved Gold-layer outputs from the Databricks `cityfix.gold` schema.
+The dashboard is being refined during Week 9 using the approved Gold-layer outputs from the Databricks `cityfix.gold` schema.
 
 Expected Power BI file:
 
 ```text
 dashboard/powerbi_dashboard.pbix
-````
+```
+
+---
 
 ## Power BI Source
 
@@ -31,17 +30,19 @@ cityfix
 gold
 ```
 
-The selected Gold sources used for the dashboard are:
+The approved Gold sources identified for the dashboard are:
 
-| Gold Table                         | Purpose                          | Dashboard Use    |
-| ---------------------------------- | -------------------------------- | ---------------- |
-| `agency_sla_summary`               | Agency SLA performance           | SLA Dashboard    |
-| `borough_backlog_summary`          | Backlog by borough               | Civic Operations |
-| `category_volume_summary`          | Request volume by category       | Category Trends  |
-| `channel_and_location_summary`     | Requests by channel and location | Civic Operations |
-| `request_resolution_trend_summary` | Request resolution trends        | SLA / Trends     |
+| Gold Table | Purpose | Dashboard Use |
+|---|---|---|
+| `agency_sla_summary` | Agency SLA performance | Agency/SLA analysis |
+| `borough_backlog_summary` | Backlog by borough | Civic Operations |
+| `category_volume_summary` | Request volume by category | Category analysis |
+| `channel_and_location_summary` | Requests by channel and location | Civic Operations |
+| `request_resolution_trend_summary` | Request resolution trends | Resolution Trends |
 
-Power BI dashboard sources are intended to come from the approved Gold layer only. Raw, Bronze, Silver, Candidate Silver, Trusted Silver detail, and Quarantine data are not used as dashboard sources.
+The dashboard is intended to use approved Gold-layer outputs rather than Raw, Bronze, Silver, Candidate Silver, Trusted Silver detail, or Quarantine data.
+
+---
 
 ## Gold Table Grain and Keys
 
@@ -53,15 +54,15 @@ Power BI dashboard sources are intended to come from the approved Gold layer onl
 
 **Key:**
 
-* `agency_key`
+- `agency_key`
 
 **Main fields:**
 
-* `total_requests`
-* `sla_eligible_requests`
-* `sla_met_requests`
-* `avg_resolution_hours`
-* `sla_compliance_rate`
+- `total_requests`
+- `sla_eligible_requests`
+- `sla_met_requests`
+- `avg_resolution_hours`
+- `sla_compliance_rate`
 
 ---
 
@@ -73,12 +74,12 @@ Power BI dashboard sources are intended to come from the approved Gold layer onl
 
 **Composite key:**
 
-* `snapshot_date`
-* `geography_key`
+- `snapshot_date`
+- `geography_key`
 
 **Main field:**
 
-* `open_backlog`
+- `open_backlog`
 
 ---
 
@@ -90,12 +91,12 @@ Power BI dashboard sources are intended to come from the approved Gold layer onl
 
 **Key:**
 
-* `complaint_category_key`
+- `complaint_category_key`
 
 **Main fields:**
 
-* `total_requests`
-* `mapped_requests`
+- `total_requests`
+- `mapped_requests`
 
 ---
 
@@ -107,14 +108,14 @@ Power BI dashboard sources are intended to come from the approved Gold layer onl
 
 **Keys:**
 
-* `channel_key`
-* `location_type_key`
+- `channel_key`
+- `location_type_key`
 
 **Main fields:**
 
-* `total_requests`
-* `avg_resolution_hours`
-* `sla_met_requests`
+- `total_requests`
+- `avg_resolution_hours`
+- `sla_met_requests`
 
 ---
 
@@ -126,28 +127,34 @@ Power BI dashboard sources are intended to come from the approved Gold layer onl
 
 **Key:**
 
-* `resolution_date`
+- `resolution_date`
 
 **Main fields:**
 
-* `resolved_requests`
-* `avg_resolution_hours`
-* `min_resolution_hours`
-* `max_resolution_hours`
+- `resolved_requests`
+- `avg_resolution_hours`
+- `min_resolution_hours`
+- `max_resolution_hours`
+
+---
 
 ## Relationships
 
 The selected Gold tables have different grains and are treated as separate summary-level datasets.
 
-Relationships are created only where the Gold design and cardinality are understood.
+Relationships are retained only where the Gold design and cardinality are understood.
 
-The dashboard does not directly join two summary or fact Gold tables merely because they contain a similarly named column.
+The dashboard does not directly join summary-level Gold tables merely because they contain similarly named columns.
 
 Where a safe relationship is not required, the Gold tables remain independent.
 
+During Week 9, the existing model relationships were reviewed without changing their intended design.
+
+---
+
 ## Measures
 
-The following measures were created for the first working Power BI dashboard.
+The following measures are used in the Power BI dashboard.
 
 ### Total Requests
 
@@ -184,49 +191,73 @@ Category Requests =
 SUM(category_volume_summary[total_requests])
 ```
 
+---
+
 ## Dashboard Pages
 
 ### Civic Operations
 
-The first working dashboard page contains operational KPIs and visuals including:
+The main Civic Operations page contains operational KPIs and visuals including:
 
-* Total Requests
-* Open Backlog
-* SLA Compliance Rate
-* Total Requests by Channel
-* Open Backlog by Borough
-* Total Requests by Location Type
-* Resolved Requests Over Time
+- Total Requests
+- Open Backlog
+- SLA Compliance Rate
+- Total Requests by Channel
+- Open Backlog by Borough
+- Total Requests by Location Type
+- Resolved Requests Over Time
+
+The page was refined during Week 9 for clearer visual hierarchy, titles, labels, spacing, and interaction behavior.
+
+---
 
 ### Category Trends
 
-A dashboard page was created for category-level request analysis using the `category_volume_summary` Gold source.
+A Category Trends page is available for category-level analysis using the `category_volume_summary` Gold source.
 
-Further visual refinement and detailed insight storytelling are part of Week 9.
+Further refinement is performed only where the visual is genuinely required for the dashboard's business questions.
 
-## Validation
+---
+
+## Week 9 Interaction Validation
+
+Dashboard interactions were reviewed during Week 9.
+
+The following behaviors were observed:
+
+- Selecting a borough affects the channel visual through the existing dashboard interaction.
+- Selecting a channel does not change the open backlog by borough visual.
+- Selecting a location type does not produce an unintended change in the other reviewed visuals.
+- Selecting a year on the resolution trend displays the corresponding value without an unintended cross-visual change.
+- Interactions were reviewed without changing the intended meaning of the measures.
+
+The interaction behavior is documented as part of the Week 9 dashboard refinement process.
+
+---
+
+## Gold Validation
 
 The selected Gold tables were validated in Databricks before Power BI use.
 
-| Gold Table                         |   Rows | Columns | Duplicate Rows |
-| ---------------------------------- | -----: | ------: | -------------: |
-| `agency_sla_summary`               |     12 |       6 |              0 |
-| `borough_backlog_summary`          | 15,800 |       3 |              0 |
-| `category_volume_summary`          |     32 |       3 |              0 |
-| `channel_and_location_summary`     |     41 |       5 |              0 |
-| `request_resolution_trend_summary` |    392 |       5 |              0 |
+| Gold Table | Rows | Columns | Duplicate Rows |
+|---|---:|---:|---:|
+| `agency_sla_summary` | 12 | 6 | 0 |
+| `borough_backlog_summary` | 15,800 | 3 | 0 |
+| `category_volume_summary` | 32 | 3 | 0 |
+| `channel_and_location_summary` | 41 | 5 | 0 |
+| `request_resolution_trend_summary` | 392 | 5 | 0 |
 
 ### Key Validation Results
 
-| Table                              | Key                      | Distinct Values | Null Values |
-| ---------------------------------- | ------------------------ | --------------: | ----------: |
-| `agency_sla_summary`               | `agency_key`             |              12 |           0 |
-| `borough_backlog_summary`          | `snapshot_date`          |             395 |           0 |
-| `borough_backlog_summary`          | `geography_key`          |              40 |           0 |
-| `category_volume_summary`          | `complaint_category_key` |              32 |           0 |
-| `channel_and_location_summary`     | `channel_key`            |               6 |           0 |
-| `channel_and_location_summary`     | `location_type_key`      |               8 |           0 |
-| `request_resolution_trend_summary` | `resolution_date`        |             392 |           0 |
+| Table | Key | Distinct Values | Null Values |
+|---|---|---:|---:|
+| `agency_sla_summary` | `agency_key` | 12 | 0 |
+| `borough_backlog_summary` | `snapshot_date` | 395 | 0 |
+| `borough_backlog_summary` | `geography_key` | 40 | 0 |
+| `category_volume_summary` | `complaint_category_key` | 32 | 0 |
+| `channel_and_location_summary` | `channel_key` | 6 | 0 |
+| `channel_and_location_summary` | `location_type_key` | 8 | 0 |
+| `request_resolution_trend_summary` | `resolution_date` | 392 | 0 |
 
 The composite key:
 
@@ -236,7 +267,9 @@ snapshot_date + geography_key
 
 for `borough_backlog_summary` was checked and found to be unique.
 
-All five selected Gold tables were also checked for duplicate rows. The total row count and distinct row count matched for each selected table.
+All five selected Gold tables were checked for duplicate rows. The total row count and distinct row count matched for each selected table.
+
+---
 
 ## Gold Reconciliation
 
@@ -260,74 +293,134 @@ and uses:
 SUM(channel_and_location_summary[total_requests])
 ```
 
-Other dashboard measures are mapped directly to their respective Gold source tables.
+During Week 9 validation, the Power BI Total Requests card displayed approximately:
+
+```text
+45K
+```
+
+with the card showing an `(All)` filter state.
+
+This does not currently match the Databricks Gold total of `179701`.
+
+Therefore, the reconciliation is **not yet considered complete**.
+
+The difference must be investigated before final submission by checking the Power BI model, source data, filters, aggregation, and refresh state.
+
+No manual correction of the Gold value has been performed.
+
+---
 
 ## Power BI Connection and Refresh
 
 The dashboard uses a Databricks connection to the `cityfix.gold` schema.
 
-The Power BI model should be refreshed from the same governed Gold source.
+The Power BI model is intended to refresh from the same governed Gold source.
 
-During Week 8, an attempted DBFS-based temporary export route was not available because DBFS access was disabled in the Databricks environment. The controlled Databricks Gold connection was therefore used for the Power BI hand-off.
+During Week 8, an attempted DBFS-based temporary export route was not available because DBFS access was disabled in the Databricks environment.
+
+The controlled Databricks Gold connection was therefore used for the Power BI hand-off.
 
 No manual correction of Gold values was performed.
 
-## Evidence
+---
 
-Week 8 execution evidence is stored in:
+## Dashboard Insights
 
-```text
-screenshots/
-```
-
-Expected naming pattern:
-
-```text
-screenshots/week08_*.png
-```
-
-Screenshots should contain genuine Databricks validation and Power BI execution evidence.
-
-## Repository Files
-
-The main Week 8 repository files are:
-
-```text
-notebooks/06_powerbi_export.ipynb
-dashboard/powerbi_dashboard.pbix
-dashboard/README.md
-screenshots/week08_*.png
-weekly_logs/week08_log.md
-```
-
-The Week 9 dashboard insights document is:
+Evidence-backed Week 9 insights are documented in:
 
 ```text
 docs/dashboard_insights.md
 ```
 
-This document is reserved for Week 9 refinement and insight work.
+The current documented insight is based on the Resolution Trends visual:
+
+- 2026 resolved requests: 770
+- Visual: Page 8 — Resolved Requests by year
+- Owning Gold: `request_resolution_trend_summary`
+- Measure/Field: `resolved_requests`
+
+Insights are descriptive and do not claim unsupported causes.
+
+---
+
+## Evidence
+
+Week 9 execution evidence is stored in:
+
+```text
+screenshots/
+```
+
+Expected Week 9 naming pattern:
+
+```text
+screenshots/week09_*.png
+```
+
+Required evidence includes:
+
+```text
+week09_01_final_model.png
+week09_02_refined_page_01.png
+week09_03_refined_page_*.png
+week09_04_filter_interaction.png
+week09_05_filtered_reconciliation.png
+week09_06_insights_evidence.png
+```
+
+Additional page screenshots should only be included where the page is genuinely used.
+
+Screenshots should contain genuine Databricks validation and Power BI execution evidence.
+
+---
+
+## Repository Files
+
+The main dashboard-related files are:
+
+```text
+dashboard/powerbi_dashboard.pbix
+dashboard/README.md
+docs/dashboard_insights.md
+notebooks/06_powerbi_export.ipynb
+screenshots/week09_*.png
+weekly_logs/week09_log.md
+```
+
+---
 
 ## PBIX File-Size Rule
 
-The preferred submission is the PBIX file together with the dashboard screenshots.
+The preferred submission is the final PBIX file together with dashboard screenshots and documentation.
 
-If the `.pbix` file becomes too large to manage cleanly in GitHub, retain the final screenshots and dashboard documentation in this repository and add a short note explaining where the PBIX is stored for mentor review.
+If the `.pbix` file becomes too large to manage cleanly in GitHub, retain the final screenshots and dashboard documentation in the repository and add a short note explaining where the PBIX is stored for mentor review.
 
 Do not upload multiple heavy PBIX versions into GitHub.
 
-## Week 8 Boundary
+---
 
-Week 8 establishes:
+## Week 9 Scope
 
-* Approved Gold source validation
-* Gold hand-off to Power BI
-* Working Power BI model
-* Data type and model validation
-* First working dashboard pages and visuals
-* Dashboard measures
-* Gold reconciliation
-* Repository documentation
-* Genuine execution evidence
+Week 9 focuses on:
 
+- Reopening and refining the existing Power BI dashboard
+- Reviewing page purpose and visual hierarchy
+- Reviewing visual titles and labels
+- Testing slicers, filters, and interactions
+- Reviewing Gold-table relationships
+- Preserving the meaning of existing measures
+- Reconciling important Power BI values with owning Gold outputs
+- Documenting evidence-backed dashboard insights
+- Updating dashboard documentation
+- Capturing final dashboard evidence
 
+---
+
+## Week 10 Boundary
+
+Week 10 work is outside the Week 9 scope.
+
+Streaming implementation and related live-event work should not be added as Week 9 dashboard work.
+
+The Week 9 focus remains dashboard refinement, interaction validation, reconciliation, documentation, and evidence-backed insights.
