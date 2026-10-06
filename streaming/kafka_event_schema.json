@@ -1,27 +1,110 @@
 {
-  "topic_name": "project.events",
-  "implementation_status": "design_only_not_mandatory",
-  "description": "Kafka-style event design for production architecture awareness. Kafka implementation is not required for this internship.",
-  "key": {
-    "field": "event_id",
-    "type": "string"
-  },
-  "value_schema": {
-    "event_id": "string",
-    "event_timestamp": "timestamp",
-    "event_type": "string",
-    "entity_id": "string",
-    "severity": "string",
-    "payload": "object"
-  },
-  "sample_event": {
-    "event_id": "EVT-001",
-    "event_timestamp": "2026-07-03T18:00:00+05:30",
-    "event_type": "alert",
-    "entity_id": "ENT-0001",
-    "severity": "medium",
-    "payload": {
-      "message": "Sample event"
+  "schema_name": "cityfix_service_request_event",
+  "schema_version": "1.0",
+  "description": "Event schema for the CityFix civic service request streaming simulation.",
+  "event": {
+    "request_event_id": {
+      "type": "string",
+      "description": "Unique identifier for the streaming event",
+      "example": "EVT-03-0001"
+    },
+    "unique_key": {
+      "type": "string",
+      "description": "Unique identifier of the CityFix service request",
+      "example": "CFX-2025-000044094"
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Type of service request event",
+      "allowed_values": [
+        "NEW_REQUEST",
+        "STATUS_UPDATE"
+      ]
+    },
+    "event_timestamp": {
+      "type": "timestamp",
+      "description": "Timestamp at which the event occurred",
+      "example": "2026-07-17T20:00:00Z"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the service request",
+      "example": "In Progress"
+    },
+    "agency_code": {
+      "type": "string",
+      "description": "CityFix agency code responsible for the request",
+      "example": "PWD"
+    },
+    "complaint_category": {
+      "type": "string",
+      "description": "Category of the civic service request",
+      "example": "Roads and Footpaths"
+    },
+    "complaint_type": {
+      "type": "string",
+      "description": "Specific type of complaint",
+      "example": "Pothole"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Additional description of the complaint",
+      "example": "Road surface damage"
+    },
+    "borough": {
+      "type": "string",
+      "description": "Borough associated with the service request",
+      "example": "North Borough"
+    },
+    "zip_code": {
+      "type": "string",
+      "description": "Postal code associated with the request",
+      "example": "500001"
+    },
+    "latitude": {
+      "type": "string",
+      "description": "Latitude of the request location",
+      "example": "17.4500"
+    },
+    "longitude": {
+      "type": "string",
+      "description": "Longitude of the request location",
+      "example": "78.3800"
+    },
+    "channel": {
+      "type": "string",
+      "description": "Channel through which the request was received",
+      "example": "Web Portal"
+    },
+    "priority": {
+      "type": "string",
+      "description": "Priority assigned to the request",
+      "example": "Normal"
+    },
+    "sla_due_timestamp": {
+      "type": "timestamp",
+      "description": "Expected SLA due timestamp for the request",
+      "example": "2026-07-18T20:00:00Z"
+    },
+    "source_system": {
+      "type": "string",
+      "description": "System that generated the event",
+      "example": "CityFix Simulation"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Version of the event schema",
+      "example": "1.0"
+    },
+    "event_sequence": {
+      "type": "integer",
+      "description": "Sequence number of the event for ordering purposes",
+      "example": 1
+    },
+    "ingestion_timestamp": {
+      "type": "timestamp",
+      "description": "Timestamp when the event was ingested",
+      "example": "2026-07-17T20:01:00Z"
     }
   }
 }
