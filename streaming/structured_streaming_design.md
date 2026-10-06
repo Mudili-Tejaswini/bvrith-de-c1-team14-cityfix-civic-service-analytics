@@ -1,17 +1,22 @@
 # Structured Streaming Design
 
 **Week:** 10  
-**Purpose:** Explain the streaming simulation.
+**Project:** CityFix Civic Service Analytics  
+**Purpose:** Document the Week 10 streaming simulation using JSON events, Auto Loader, and Structured Streaming.
 
 ---
 
 ## 1. Streaming Scenario
 
-Describe the event flow.
+CityFix service-request events are simulated as JSON files arriving in a controlled streaming input folder. Databricks Auto Loader detects the available JSON files and Structured Streaming processes the events incrementally.
 
-Example:
+The simulation uses three controlled input drops:
 
-> New JSON event files arrive in a streaming input path. Databricks Auto Loader detects the files, Structured Streaming processes them, and the output is written to a Streaming Bronze table.
+- `drop_01.json`
+- `drop_02.json`
+- `drop_03.json`
+
+The processed events contain CityFix request information such as request ID, unique request key, event type, timestamp, status, agency, complaint category, borough, channel, and priority.
 
 ---
 
@@ -20,27 +25,56 @@ Example:
 | Item | Description |
 |---|---|
 | Event file format | JSON |
-| Input path | `/Volumes/workspace/default/<project_name>/streaming_input/` |
-| Processing method | Auto Loader / Structured Streaming |
-| Output table | `bronze_streaming_events` |
-| Checkpoint path | `/Volumes/workspace/default/<project_name>/checkpoints/...` |
+| Input path | `/Volumes/cityfix/cityfix/cityfix-zenaiz/streaming/week10_input/` |
+| Processing method | Databricks Auto Loader / Structured Streaming |
+| Event types | `NEW_REQUEST`, `STATUS_UPDATE` |
+| Schema handling | Auto Loader JSON schema inference |
+| Checkpoint path | `/Volumes/cityfix/cityfix/cityfix-zenaiz/streaming/week10_checkpoint` |
 
 ---
 
-## 3. Near-Real-Time Metric
+## 3. Streaming Processing
 
-Define one simple live metric.
+The Week 10 notebook uses Auto Loader to read JSON files from the controlled input directory.
 
-Example:
+The first processing run successfully processed the available input events. A separate incremental run was then used to demonstrate streaming processing of the controlled event files.
 
-| Metric | Formula | Use |
-|---|---|---|
-| Event count by severity | Count events grouped by severity | Shows alert pressure |
+The incremental processing result contained:
+
+- **Total events:** 23
+- **Unique requests:** 20
+- **NEW_REQUEST events:** 12
+- **STATUS_UPDATE events:** 11
+
+The event-type counts provide a simple live metric for observing the processed streaming data.
 
 ---
 
-## 4. Limitations
+## 4. Near-Real-Time Metric
 
-- This is a student streaming simulation, not a production event platform.
-- Kafka is documented as production architecture awareness only.
-- Streaming events are synthetic and educational.
+The main streaming metric is the count of events by event type.
+
+| Metric | Result |
+|---|---:|
+| NEW_REQUEST | 12 |
+| STATUS_UPDATE | 11 |
+| Total events | 23 |
+
+This metric helps verify that streaming events are being processed and provides a simple view of the incoming event mix.
+
+---
+
+## 5. Event Flow
+
+```text
+Controlled JSON Event Files
+          ↓
+Week 10 Input Folder
+          ↓
+Databricks Auto Loader
+          ↓
+Structured Streaming
+          ↓
+Processed Streaming Events
+          ↓
+Event-Type Count Metric
